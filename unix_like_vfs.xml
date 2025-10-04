@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vfs>
+    <!-- Корневая файловая система -->
+    <directory name="bin" permissions="rwxr-xr-x" owner="root" group="root">
+        <file name="bash" permissions="rwxr-xr-x" owner="root" group="root" size="1000000">#!/bin/bash
+echo "Bash shell"
+</file>
+        <file name="ls" permissions="rwxr-xr-x" owner="root" group="root" size="50000">#!/bin/ls
+echo "List directory contents"
+</file>
+        <file name="cat" permissions="rwxr-xr-x" owner="root" group="root" size="45000">#!/bin/cat
+echo "Concatenate files"
+</file>
+    </directory>
+
+    <directory name="etc" permissions="rwxr-xr-x" owner="root" group="root">
+        <file name="passwd" permissions="rw-r--r--" owner="root" group="root" size="500">
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+user:x:1000:1000:User:/home/user:/bin/bash
+</file>
+        <file name="hosts" permissions="rw-r--r--" owner="root" group="root" size="200">
+127.0.0.1 localhost
+::1 localhost ip6-localhost ip6-loopback
+192.168.1.100 myserver
+</file>
+        <file name="shells" permissions="rw-r--r--" owner="root" group="root" size="150">
+/bin/bash
+/bin/sh
+/bin/zsh
+</file>
+    </directory>
+
+    <directory name="home" permissions="rwxr-xr-x" owner="root" group="root">
+        <directory name="user" permissions="rwxr-xr-x" owner="user" group="user">
+            <file name="readme.txt" permissions="rw-r--r--" owner="user" group="user" size="250">
+Добро пожаловать в VFS Emulator!
+
+Это виртуальная файловая система, которая имитирует
+работу UNIX-подобной командной строки.
+
+Доступные команды:
+- ls, cd, pwd, cat, uptime, who, config, echo
+</file>
+            <file name="document.txt" permissions="rw-r--r--" owner="user" group="user" size="120">
+Личный документ пользователя.
+
+Содержимое этого файла хранится в памяти
+виртуальной файловой системы.
+</file>
+            <file name="notes.md" permissions="rw-r--r--" owner="user" group="user" size="180">
+# Заметки
+
+## Проект VFS
+- Реализация виртуальной файловой системы
+- Графический интерфейс на Tkinter
+- Поддержка XML конфигураций
+</file>
+        </directory>
+
+        <directory name="testuser" permissions="rwxr-xr-x" owner="testuser" group="testuser">
+            <file name="file1.txt" permissions="rw-r--r--" owner="testuser" group="testuser" size="50">Файл тестового пользователя</file>
+        </directory>
+    </directory>
+
+    <directory name="var" permissions="rwxr-xr-x" owner="root" group="root">
+        <directory name="log" permissions="rwxr-xr-x" owner="root" group="root">
+            <file name="syslog" permissions="rw-r--r--" owner="root" group="root" size="1500">
+Dec 10 10:30:45 vfs-emulator startup: System initialized
+Dec 10 10:31:12 vfs-emulator kernel: VFS mounted successfully
+Dec 10 10:32:05 vfs-emulator user: User 'user' logged in
+</file>
+            <file name="auth.log" permissions="rw-r-----" owner="root" group="adm" size="800">
+Dec 10 09:15:30 vfs-emulator auth: root login on pts/0
+Dec 10 10:30:22 vfs-emulator auth: user login on tty1
+</file>
+        </directory>
+
+        <directory name="www" permissions="rwxr-xr-x" owner="www-data" group="www-data">
+            <file name="index.html" permissions="rw-r--r--" owner="www-data" group="www-data" size="2500">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;VFS Emulator&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Virtual File System Emulator&lt;/h1&gt;
+    &lt;p&gt;This is a test web page in VFS.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</file>
+        </directory>
+    </directory>
+
+    <directory name="tmp" permissions="rwxrwxrwt" owner="root" group="root">
+        <file name="temp_file.tmp" permissions="rw-r--r--" owner="user" group="user" size="100">Временные данные</file>
+        <file name="cache.dat" permissions="rw-r--r--" owner="user" group="user" size="2048">Кэшированные данные</file>
+    </directory>
+
+    <directory name="usr" permissions="rwxr-xr-x" owner="root" group="root">
+        <directory name="local" permissions="rwxr-xr-x" owner="root" group="root">
+            <directory name="bin" permissions="rwxr-xr-x" owner="root" group="root">
+                <file name="custom_app" permissions="rwxr-xr-x" owner="root" group="root" size="75000">Пользовательское приложение</file>
+            </directory>
+            <directory name="share" permissions="rwxr-xr-x" owner="root" group="root">
+                <file name="data.txt" permissions="rw-r--r--" owner="root" group="root" size="300">Общие данные</file>
+            </directory>
+        </directory>
+    </directory>
+
+    <directory name="opt" permissions="rwxr-xr-x" owner="root" group="root">
+        <directory name="vfs" permissions="rwxr-xr-x" owner="root" group="root">
+            <file name="README" permissions="rw-r--r--" owner="root" group="root" size="500">
+VFS Emulator Installation
+
+This is the virtual file system emulator package.
+All files are stored in memory and loaded from XML configuration.
+</file>
+        </directory>
+    </directory>
+</vfs>

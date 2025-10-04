@@ -6,7 +6,8 @@ XML-based virtual file system implementation
 
 import xml.etree.ElementTree as ET
 import os
-
+import time
+from datetime import datetime
 
 class VFSNode:
     def __init__(self, name, node_type, content=None):
@@ -30,7 +31,6 @@ class VFSNode:
             path_parts.append(current.name)
             current = current.parent
         return '/' + '/'.join(reversed(path_parts))
-
 
 class VirtualFileSystem:
     def __init__(self, config):
@@ -143,3 +143,40 @@ class VirtualFileSystem:
         if file_node.type != 'file':
             return None, f"Not a file: {path}"
         return file_node.content, None
+
+    def __init__(self, config):
+        # ... существующий код ...
+        self.start_time = time.time()
+
+    def get_uptime(self):
+        uptime = time.time() - self.start_time
+        hours = int(uptime // 3600)
+        minutes = int((uptime % 3600) // 60)
+        seconds = int(uptime % 60)
+        return 0, hours, minutes, seconds
+
+    def get_who_info(self):
+        return [
+            {"user": "user", "terminal": "tty1", "login_time": "10:30"},
+            {"user": "root", "terminal": "pts/0", "login_time": "09:15", "host": "192.168.1.100"}
+        ]
+
+    def list_directory(self, path=None, detailed=False):
+        target = self.resolve_path(path) if path else self.current_directory
+        if not target or target.type != 'directory':
+            return None, "Directory not found"
+
+        if detailed:
+            items = []
+            for name, node in target.children.items():
+                item_type = "d" if node.type == 'directory' else "-"
+                items.append(f"{item_type}rw-r--r-- 1 user user 4096 Dec 10 12:00 {name}")
+            return items, None
+        else:
+            items = []
+            for name, node in target.children.items():
+                if node.type == 'directory':
+                    items.append(f"{name}/")
+                else:
+                    items.append(name)
+            return sorted(items), None
