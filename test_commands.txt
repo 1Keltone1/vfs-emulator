@@ -1,0 +1,49 @@
+# Comprehensive Test Script for VFS Emulator
+# Testing all commands and error handling
+
+# System information
+config
+uptime
+who
+vfsinfo
+
+# Navigation tests
+pwd
+ls
+ls -l
+cd /home
+pwd
+ls
+cd user
+pwd
+ls -l
+
+# File operations
+cat readme.txt
+cat document.txt
+cat /etc/passwd
+cat /etc/hosts
+
+# Error handling tests
+cd /nonexistent_directory
+ls /invalid/path
+cat missing_file.txt
+cd /etc/passwd
+
+# Relative paths
+cd /var/log
+pwd
+cd ../..
+pwd
+cd ./home/./user/.
+pwd
+
+# Multiple commands
+echo "Testing echo command"
+echo "Multiple" "arguments" "test"
+
+# Final status
+pwd
+config
+vfsinfo
+echo "All tests completed!"

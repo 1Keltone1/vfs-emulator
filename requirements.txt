@@ -1,2 +1,11 @@
-# VFS Emulator - Stage 1
-# Basic REPL implementation
+# VFS Emulator - Stage 5: GUI Version
+# Complete virtual file system emulator with graphical interface
+
+# Core dependencies (included in standard Python)
+# tkinter - GUI framework
+# xml.etree.ElementTree - XML parsing
+# argparse - command line arguments
+# os, sys, time - system utilities
+
+# No external dependencies required
+# Project uses only standard Python libraries

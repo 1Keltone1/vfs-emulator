@@ -1,10 +1,54 @@
 # VFS Emulator Startup Script
-# Testing basic commands
+# Демонстрационный скрипт для тестирования функциональности
 
-help
+# Показать конфигурацию
+config
+
+# Проверить системную информацию
+uptime
+who
+
+# Навигация по файловой системе
+echo "=== Basic Navigation ==="
 pwd
 ls
 ls -l
-cd /home
+
+# Исследование корневой директории
+echo "=== Root Directory ==="
+cd /
 pwd
-echo "Script execution test"
+ls -l
+
+# Работа с домашней директорией
+echo "=== Home Directory ==="
+cd /home/user
+pwd
+ls -l
+
+# Чтение файлов
+echo "=== File Operations ==="
+cat readme.txt
+cat document.txt
+
+# Исследование системных директорий
+echo "=== System Directories ==="
+cd /etc
+pwd
+ls
+cat passwd
+cat hosts
+
+# Проверка бинарных файлов
+echo "=== Binary Directory ==="
+cd /bin
+pwd
+ls -l
+
+# Возврат домой и финальные команды
+echo "=== Final Commands ==="
+cd /home/user
+pwd
+vfsinfo
+
+echo "=== Startup script completed successfully ==="
