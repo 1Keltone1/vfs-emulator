@@ -1,0 +1,2 @@
+# VFS Emulator - Stage 1
+# Basic REPL implementation
