@@ -348,6 +348,51 @@ class VirtualFileSystem:
         ]
         return users
 
+    def touch(self, filename):
+        """
+        Создать пустой файл или обновить время модификации
+        Возвращает error message или None при успехе
+        """
+        if not filename:
+            return "укажите имя файла"
+
+        filename = filename.strip()
+
+        # Проверяем валидность имени файла
+        if not self.is_valid_name(filename):
+            return f"недопустимое имя файла '{filename}'"
+
+        # Получаем текущую директорию
+        current_dir = self.current_directory
+
+        # Проверяем, существует ли файл
+        if filename in current_dir.children:
+            # Обновляем время модификации существующего файла
+            current_dir.children[filename].modified_time = time.time()
+            return None  # Успех
+        else:
+            # Создаем новый файл
+            new_file = VFSNode(
+                filename,
+                'file',
+                content="",
+                permissions="rw-r--r--",
+                owner="user",
+                group="user",
+                size=0
+            )
+            current_dir.add_child(new_file)
+            return None  # Успех
+
+    def is_valid_name(self, name):
+        """
+        Проверяет валидность имени файла/директории
+        """
+        if not name or name.strip() == '':
+            return False
+        # Запрещенные символы в именах
+        invalid_chars = ['/', '\\', ':', '*', '?', '"', '<', '>', '|']
+        return all(char not in name for char in invalid_chars)
 
 class ScriptRunner:
     """Выполнение стартовых скриптов"""

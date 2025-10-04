@@ -15,7 +15,6 @@ from datetime import datetime
 # Импорт логики VFS
 from vfs_core import VFSConfig, VirtualFileSystem, ScriptRunner
 
-
 class VFSGUIEmulator:
     def __init__(self):
         # Парсим аргументы командной строки
@@ -125,6 +124,7 @@ class VFSGUIEmulator:
             ("Help", self.show_help),
             ("PWD", self.cmd_pwd),
             ("LS", self.cmd_ls),
+            ("Touch", self.cmd_touch),  # Новая кнопка
             ("Config", self.cmd_config),
             ("Uptime", self.cmd_uptime),
             ("Who", self.cmd_who),
@@ -260,6 +260,7 @@ class VFSGUIEmulator:
                 if error:
                     self.print_output(f"cd: {error}\n")
 
+
             elif command == "cat":
                 if not args:
                     self.print_output("cat: missing file operand\n")
@@ -302,6 +303,18 @@ class VFSGUIEmulator:
                 else:
                     self.print_output("VFS: Default structure\n")
 
+            elif command == "touch":
+                if not args:
+                    self.print_output("touch: укажите имя файла\n")
+                else:
+                    filename = args[0]
+                    error = self.vfs.touch(filename)
+                    if error:
+                        self.print_output(f"touch: {error}\n")
+                    else:
+                        # Не выводим ничего при успехе (как в реальном touch)
+                        pass
+
             elif command == "echo":
                 self.print_output(' '.join(args) + '\n')
 
@@ -343,25 +356,39 @@ class VFSGUIEmulator:
         self.print_output(f"{self.vfs.get_current_path()}$ who\n")
         self.execute_command("who")
 
+    def cmd_touch(self):
+        """Обработка команды touch через диалоговое окно"""
+        from tkinter import simpledialog
+        filename = simpledialog.askstring("Touch", "Enter filename:")
+        if filename:
+            self.print_output(f"{self.vfs.get_current_path()}$ touch {filename}\n")
+            error = self.vfs.touch(filename)
+            if error:
+                self.print_output(f"touch: {error}\n")
+            else:
+                self.print_output(f"File '{filename}' created/updated\n")
+            self.update_prompt()
+
     def show_help(self):
         help_text = """
-Available commands:
-  pwd               - Print current directory
-  ls [path]         - List directory contents
-  ls -l [path]      - Detailed directory listing
-  cd [dir]          - Change directory
-  cat [file]        - Display file content
-  uptime            - Show system uptime
-  who               - Show logged in users
-  config            - Show current configuration
-  vfsinfo           - Show VFS information
-  echo [text]       - Display text
-  help              - Show this help message
-  exit              - Exit the emulator
+    Available commands:
+      pwd               - Print current directory
+      ls [path]         - List directory contents
+      ls -l [path]      - Detailed directory listing
+      cd [dir]          - Change directory
+      cat [file]        - Display file content
+      touch [file]      - Create empty file or update timestamp
+      uptime            - Show system uptime
+      who               - Show logged in users
+      config            - Show current configuration
+      vfsinfo           - Show VFS information
+      echo [text]       - Display text
+      help              - Show this help message
+      exit              - Exit the emulator
 
-Quick access:
-  Use toolbar buttons or menu for quick command execution
-"""
+    Quick access:
+      Use toolbar buttons or menu for quick command execution
+    """
         self.print_output(help_text)
 
     def show_about(self):

@@ -39,6 +39,14 @@ ls
 cat passwd
 cat hosts
 
+# Тестирование команды touch
+echo "=== Testing touch command ==="
+touch newfile1.txt
+touch newfile2.txt
+ls -l
+touch newfile1.txt  # Обновление времени существующего файла
+ls -l newfile1.txt
+
 # Проверка бинарных файлов
 echo "=== Binary Directory ==="
 cd /bin

@@ -38,6 +38,22 @@ pwd
 cd ./home/./user/.
 pwd
 
+# Тестирование команды touch
+echo "=== Touch command tests ==="
+touch test_file1.txt
+touch test_file2.md
+ls -l
+touch test_file1.txt  # Update timestamp
+cat test_file1.txt  # Should be empty
+
+# Error cases
+touch
+touch invalid/name.txt
+touch "file with spaces.txt"
+
+# Verify files were created
+ls -l
+
 # Multiple commands
 echo "Testing echo command"
 echo "Multiple" "arguments" "test"

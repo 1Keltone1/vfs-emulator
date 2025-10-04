@@ -7,6 +7,8 @@ python main.py --help
 echo "2. Debug mode:"
 python main.py --debug << EOF
 pwd
+touch testfile.txt
+ls -l
 exit
 EOF
 
