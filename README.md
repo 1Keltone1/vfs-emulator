@@ -1,2 +1,23 @@
-# vfs-emulator
-Virtual File System Emulator with GUI
+
+# VFS Emulator - Virtual File System Emulator
+
+Графический эмулятор виртуальной файловой системы с UNIX-подобным интерфейсом.
+
+## Возможности
+
+- **Графический интерфейс** на Tkinter
+- **Виртуальная файловая система** в памяти
+- **UNIX-подобные команды**: ls, cd, pwd, cat, uptime, who
+- **Загрузка конфигураций** из XML файлов
+- **Выполнение скриптов** с поддержкой комментариев
+- **Обработка ошибок** и валидация
+
+## Структура проекта
+vfs-emulator
+- main.py # Основная GUI программа
+- vfs_core.py # Логика виртуальной файловой системы
+- unix_like_vfs.xml # Пример конфигурации VFS
+- startup_demo.txt # Демонстрационный скрипт
+- test_commands.txt # Тестовые команды
+- requirements.txt # Зависимости
+- README.md # Эта документация
