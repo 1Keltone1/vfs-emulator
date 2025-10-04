@@ -1,0 +1,10 @@
+# VFS Emulator Startup Script
+# Testing basic commands
+
+help
+pwd
+ls
+ls -l
+cd /home
+pwd
+echo "Script execution test"
